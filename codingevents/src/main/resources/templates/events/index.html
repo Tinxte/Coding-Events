@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+    <th:block th:if="${list.size()}">
+
+        <ul>
+            <li th:each="item : ${list}" th:text="${item}"></li>
+        </ul>
+
+    </th:block>
+
+    <h2 th:unless="${list.size()}">No events found!</h2>
+
+</body>
+</html>
