@@ -5,15 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-    <th:block th:if="${list.size()}">
 
+
+<h1>All Events</h1>
+
+<nav th:replace="fragments :: navigation"> </nav>
+
+
+<h2 th:unless="${events} and ${events.size()}">No events found!</h2>
+
+    <th:block th:if="${events.size()}">
         <ul>
-            <li th:each="item : ${list}" th:text="${item}"></li>
+            <li th:each="event : ${events}" th:text="${event}"></li>
         </ul>
-
     </th:block>
-
-    <h2 th:unless="${list.size()}">No events found!</h2>
 
 </body>
 </html>
