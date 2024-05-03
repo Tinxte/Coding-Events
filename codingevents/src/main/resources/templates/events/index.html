@@ -13,16 +13,23 @@
 
 <h2 th:unless="${events} and ${events.size()}">No events found!</h2>
 
+
+<img th:src="@{/images/BlkStdSchnauzer2.jpg}"/>
+
 <table class = "table table-striped">
     <thead>
         <tr>
             <th>
                 Name
             </th>
+            <th>Description</th>
+            <th>Location</th>
         </tr>
     </thead>
     <tr th:each="event : ${events}">
-            <td th:text="${event}"></td>
+        <td th:text="${event.key}"></td>
+        <td th:text="${event.value}"></td>
+        <td th:replace = "fragments :: address"></td>
     </tr>
 </table>
 
