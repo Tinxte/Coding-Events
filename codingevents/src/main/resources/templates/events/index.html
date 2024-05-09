@@ -20,15 +20,23 @@
     <thead>
         <tr>
             <th>
+                ID
+            </th>
+            <th>
                 Name
             </th>
-            <th>Description</th>
-            <th>Location</th>
+            <th>
+                Description
+            </th>
+            <th>
+                Location
+            </th>
         </tr>
     </thead>
     <tr th:each="event : ${events}">
-        <td th:text="${event.key}"></td>
-        <td th:text="${event.value}"></td>
+        <td th:text="${event.id}"></td>
+        <td th:text="${event.name}"></td>
+        <td th:text="${event.description}"></td>
         <td th:replace = "fragments :: address"></td>
     </tr>
 </table>
