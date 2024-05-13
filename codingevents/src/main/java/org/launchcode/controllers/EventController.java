@@ -1,10 +1,16 @@
 package org.launchcode.controllers;
 
+import jakarta.validation.Valid;
 import org.launchcode.data.EventData;
 import org.launchcode.models.Event;
+import org.launchcode.models.EventType;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,13 +37,20 @@ public class EventController {
 @GetMapping("create")
 public String renderCreateEventForm(Model model) {
     model.addAttribute("title", "Create Event");
-
+    model.addAttribute(new Event());
+    model.addAttribute("types", EventType.values());
     return "events/create";
 }
 
 //lives at /events/create
 @PostMapping("create")
-public String createEvent(@ModelAttribute Event newEvent) {
+public String createEvent(@ModelAttribute @Valid Event newEvent,
+                          Errors errors, Model model) {
+    if (errors.hasErrors()) {
+        model.addAttribute("title", "Create Event");
+        return "events/create";
+
+    }
     EventData.add(newEvent);
     return "redirect:/events";
 }
@@ -60,5 +73,16 @@ public String createEvent(@ModelAttribute Event newEvent) {
     }
     return "redirect:/events";
     }
+
+//    @GetMapping
+//    public String displayEditForm(Model model, @PathVariable int eventId) {
+//        //controller code will go here
+//
+//    }
+//
+//    @PostMapping
+//    public String processEditForm(int eventId, String name, String description) {
+//        /controller code will go here
+//    }
 
 }
